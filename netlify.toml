@@ -1,0 +1,7 @@
+[build]
+  base = "raji-shining"
+  command = "npm run build"
+  publish = "raji-shining/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
