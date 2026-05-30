@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #f4ede1;
+  --ink-soft: rgba(244, 237, 225, 0.78);
+  --ink-faint: rgba(244, 237, 225, 0.42);
+  --gold: #f5c66c;
+  --orb: #d4f4ff;
+  --bg-base: #08060f;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quad: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  background-color: var(--bg-base);
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── animations ── */
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-6px) translateX(3px); }
+  50% { transform: translateY(-3px) translateX(-2px); }
+  75% { transform: translateY(-8px) translateX(1px); }
+}
+
+@keyframes flutter {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+@keyframes wing-flap {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.85); }
+}
+
+@keyframes bounce-line {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes coin-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  12.5% { transform: translate(-5%, -5%); }
+  25% { transform: translate(5%, 0%); }
+  37.5% { transform: translate(0%, 5%); }
+  50% { transform: translate(-5%, 0%); }
+  62.5% { transform: translate(5%, -5%); }
+  75% { transform: translate(0%, 5%); }
+  87.5% { transform: translate(-5%, -5%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── overlays ── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 91;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  overflow: hidden;
+}
+
+.grain-inner {
+  width: 200%;
+  height: 200%;
+  animation: grain-shift 0.8s steps(8) infinite;
+}
+
+/* ── glass ── */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── floating lights ── */
+@keyframes drift-up {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* ── page load curtain ── */
+@keyframes curtain-reveal {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes curtain-text-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── music glow ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(245, 198, 108, 0.3), 0 4px 24px rgba(0,0,0,0.4); }
+  50% { box-shadow: 0 0 20px rgba(245, 198, 108, 0.5), 0 4px 24px rgba(0,0,0,0.4); }
+}
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
